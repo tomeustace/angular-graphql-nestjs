@@ -1,8 +1,0 @@
-type Photo {
-  id: Int!
-  name: String
-}
-
-type Query {
-  photo(id: Int!): Photo
-}

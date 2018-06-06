@@ -1,21 +1,20 @@
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { graphqlExpress } from 'apollo-server-express';
 import { GraphQLModule, GraphQLFactory } from '@nestjs/graphql';
-import { AuthorResolver } from 'author-resolver';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { PersonModule } from 'person/person.module';
 import { Connection } from 'typeorm';
-import { PhotoModule } from 'photo/photo.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { NestModule, Module, MiddlewareConsumer } from '@nestjs/common';
 
 export class ApplicationModule {
   constructor(private readonly connection: Connection) {}
 }
 @Module({
   imports: [
+    PersonModule,
     GraphQLModule,
-    PhotoModule,
     TypeOrmModule.forRoot({
       type: 'mongodb',
       host: 'localhost',
@@ -28,7 +27,7 @@ export class ApplicationModule {
     }),
   ],
   controllers: [AppController],
-  providers: [ AppService, AuthorResolver],
+  providers: [ AppService ],
 })
 export class AppModule implements NestModule {
 

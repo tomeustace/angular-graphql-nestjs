@@ -1,13 +1,15 @@
 <div>
 
   <mat-toolbar color="primary">
-    <span><mat-icon>mood</mat-icon></span>
 
-    <span>Yay, Material in Angular 2!</span>
+    <span>Angular Material / Apollo Graphql / NestJs Seed </span>
 
     <button mat-icon-button  [mat-menu-trigger-for]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
+
+    <span><mat-icon>mood</mat-icon></span>
+
   </mat-toolbar>
 
   <mat-menu x-position="before" #menu="matMenu">
@@ -16,11 +18,21 @@
   </mat-menu>
 
   <mat-card>
-    <button mat-button>All</button>
-    <button mat-raised-button>Of</button>
-    <button mat-raised-button color="accent">Buttons</button>
-    <button mat-raised-button color="primary" (click)="getPhoto()">Photo</button>
-    <h2 *ngIf="photo">Name {{ photo.name }}</h2>
+
+    <input matInput type="text" value="" placeholder="First Name" #firstName/>
+    <input matInput type="text" value="" placeholder="Last Name" #lastName/>
+    <button mat-raised-button color="primary" (click)="createPerson(firstName.value, lastName.value)">Create Person</button>
+    <br/>
+    <span *ngIf="personCreated">Person Created <mat-icon>check</mat-icon></span>
+
+  </mat-card>
+
+  <mat-card>
+
+    <input matInput type="text" value="" placeholder="Last Name" #findLastName/>
+    <button mat-raised-button color="primary" (click)="findPerson(findLastName.value)">Find Person</button>
+    <h2 *ngIf="person">First Name {{ person.firstName }}</h2>
+
   </mat-card>
 
   <span class="done">

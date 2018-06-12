@@ -10,14 +10,19 @@ export class PersonService {
     private readonly personRepository: Repository<Person>,
   ) {}
 
-  async findAll(): Promise<Person[]> {
-    return await this.personRepository.find();
+  async find(lastName): Promise<Person> {
+    return await this.personRepository.findOne({lastName: lastName});
   }
 
-  async updateFirstName(id: number, name: string): Promise<any> {
-    let personToUpdate = await this.personRepository.findOne(1);
-    personToUpdate.firstName = "Me, my friends and polar bears";
+  async updateLastName(oldName: string, newName: string): Promise<any> {
+    let personToUpdate = await this.personRepository.findOne({lastName: oldName});
+    personToUpdate.lastName = newName;
     return await this.personRepository.save(personToUpdate);
+  }
+
+  async deletePerson(lastName: string): Promise<any> {
+    let personToDelete = await this.personRepository.findOne({lastName: lastName});
+    return await this.personRepository.delete(personToDelete);
   }
 
   async create(person: Person): Promise<Person> {

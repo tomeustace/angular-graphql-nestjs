@@ -16,14 +16,7 @@ export class PersonResolver {
   @Query('person')
   getPerson(obj, args, context, info) {
     console.log('PersonResolver#getPerson', args)
-    return this.personService.findAll().then(phs => {
-      const resp = find(phs, { lastName: args.lastName });
-      let person = new Person();
-      person.firstName = resp.firstName;
-      person.lastName = resp.lastName;
-      person.id = resp.id; 
-      return person;
-    });
+    return this.personService.find(args.lastName);
   }
 
   @Mutation()
@@ -36,8 +29,14 @@ export class PersonResolver {
   }
 
   @Mutation()
-  async updateFirstName(_, { id, name }): Promise<Person|void> {
-    console.log('PersonResolver#updateName', id, name);
-    return await this.personService.updateFirstName(id, name);
+  async deletePerson(_, { lastName }): Promise<Person|void> {
+    console.log('PersonResolver#deletePerson', lastName );
+    return await this.personService.deletePerson(lastName);
+  }
+
+  @Mutation()
+  async updateLastName(_, { oldLastName, newLastName }): Promise<Person|void> {
+    console.log('PersonResolver#updateLastName', oldLastName, newLastName);
+    return await this.personService.updateLastName(oldLastName, newLastName);
   }
 }

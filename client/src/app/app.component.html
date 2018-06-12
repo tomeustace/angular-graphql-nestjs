@@ -18,6 +18,7 @@
   </mat-menu>
 
   <mat-card>
+    <h3>Create Person</h3>
 
     <input matInput type="text" value="" placeholder="First Name" #firstName/>
     <input matInput type="text" value="" placeholder="Last Name" #lastName/>
@@ -28,10 +29,32 @@
   </mat-card>
 
   <mat-card>
+    <h3>Find Person</h3>
 
     <input matInput type="text" value="" placeholder="Last Name" #findLastName/>
     <button mat-raised-button color="primary" (click)="findPerson(findLastName.value)">Find Person</button>
     <h2 *ngIf="person">First Name {{ person.firstName }}</h2>
+    <h2 *ngIf="personNotFound">Person Not Found</h2>
+
+  </mat-card>
+
+  <mat-card>
+    <h3>Update Person</h3>
+    <input matInput type="text" value="" placeholder="Current Last Name" #oldLastName/>
+    <input matInput type="text" value="" placeholder="New Last Name" #newLastName/>
+    <button mat-raised-button color="primary" (click)="updatePerson(oldLastName.value, newLastName.value)">Update Person</button>
+    <br/>
+    <span *ngIf="personUpdated">Person Updated {{ updatedLastName }} <mat-icon>check</mat-icon></span>
+
+  </mat-card>
+
+  <mat-card>
+    <h3>Delete Person</h3>
+
+    <input matInput type="text" value="" placeholder="Last Name" #deleteLastName/>
+    <button mat-raised-button color="primary" (click)="deletePerson(deleteLastName.value)">Delete Person</button>
+    <br/>
+    <span *ngIf="personDeleted">Person Deleted <mat-icon>check</mat-icon></span>
 
   </mat-card>
 

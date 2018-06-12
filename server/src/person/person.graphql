@@ -9,6 +9,7 @@ type Query {
 }
 
 type Mutation {
-  updateFirstName(id: Int, name: String!): Person
+  updateLastName(oldLastName: String!, newLastName: String!): Person
   createPerson(firstName: String!, lastName: String!): Person
+  deletePerson(lastName: String!): Person
 }
